@@ -1,0 +1,3032 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "print(s\"\"\"%html\n<center>\n    <h1><a href=\"http://diplodatos.famaf.unc.edu.ar/\">Diplomatura en Ciencia de Datos, Aprendizaje Automático y sus Aplicaciones</a></h1>\n    <h2>Curso <a href=\"https://sites.google.com/view/eleccion-optativas-diplodatos/programaci%C3%B3n-distribu%C3%ADda-sobre-grandes-vol%C3%BAmenes-de-datos\">Programación Distribuida sobre Grandes Volúmenes de Datos</a></h2>\n</center>\n\n<br>\n\n<h3 style=\"text-align:center;\"> Damián Barsotti  </h3>\n\n<h3 style=\"text-align:center;\">\n    <a href=\"http://www.famaf.unc.edu.ar\">\n    Facultad de Matemática Astronomía Física y Computación\n    </a>\n<br/>\n    <a href=\"http://www.unc.edu.ar\">\n    Universidad Nacional de Córdoba\n    </a>\n<br/>\n    <center>\n    <a href=\"http://www.famaf.unc.edu.ar\">\n    <img src=\"$baseDir/comun/logo%20UNC%20FAMAF%202016.png\" alt=\"Drawing\" style=\"width:50%;\"/>\n    </a>\n    </center>\n</h3>\n\n<p style=\"font-size:15px;\">\n    <br />\n        This work is licensed under a\n        <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.\n    <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">\n        <img alt=\"Creative Commons License\" style=\"border-width:0;vertical-align:middle;float:right\" src=\"https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png\" />\n    </a>\n</p>\n\"\"\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:25+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226713_546538124",
+      "id": "20171010-191319_1407757246",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:440"
+    },
+    {
+      "title": "Antes de comenzar",
+      "text": "%md\n### Antes de comenzar\n1. Lanzar terminal\n1. Actualizar repo:\n```sh\ncd diplodatos_bigdata\ngit pull\n```\n1. Lanzar [Zeppelin](http://zeppelin.apache.org/) en docker:\n```sh\n./docker/zeppelin.sh\n```\n1. En navegador abrir [http://localhost:8080](http://localhost:8080)\n1. Seleccionar `Import note`\n1. Elegir json en `diplodatos_bigdata/clases/07_grafos/note.zpln`\n2. Seleccionar `Clase 07 - Grandes Grafos Sociales`\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:25+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "title": false,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226714_905184388",
+      "id": "20171026-104737_1316799732",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:441"
+    },
+    {
+      "text": "%md\n# Grandes Grafos Sociales",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:26+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226714_955531281",
+      "id": "20171101-121050_1177283744",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:442"
+    },
+    {
+      "text": "%md\n## GraphFrames\n\n* Utiliza la interface Spark SQL (Dataframes).\n* Creada por [Databricks](https://databricks.com/).\n* Por ahora no viene en la distribución estandard de Spark (solo [GraphX](http://spark.apache.org/graphx/) sobre RDD's).\n* Algoritmos ya implementados como: \n    - Breadth-first search (BFS)\n    - Componentes (fuertemente) conexas\n    - Label Propagation Algorithm (para detectar comunidades)\n    - PageRank\n    - Shortest paths\n    - Triangle count.\n* **Agregación de mensajes** para hacer algoritmos.\n* **Motif finding** para queries. \n\n### Documentación:\n\n* [User Guide](https://graphframes.github.io/graphframes/docs/_site/user-guide.html).\n* [User Guide - Python](https://docs.databricks.com/spark/latest/graph-analysis/graphframes/user-guide-python.html).\n* [Documentación de la API](https://graphframes.github.io/graphframes/docs/_site/api/python/index.html).\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>GraphFrames</h2>\n<ul>\n<li>Utiliza la interface Spark SQL (Dataframes).</li>\n<li>Creada por <a href=\"https://databricks.com/\">Databricks</a>.</li>\n<li>Por ahora no viene en la distribución estandard de Spark (solo <a href=\"http://spark.apache.org/graphx/\">GraphX</a> sobre RDD&rsquo;s).</li>\n<li>Algoritmos ya implementados como:\n<ul>\n<li>Breadth-first search (BFS)</li>\n<li>Componentes (fuertemente) conexas</li>\n<li>Label Propagation Algorithm (para detectar comunidades)</li>\n<li>PageRank</li>\n<li>Shortest paths</li>\n<li>Triangle count.</li>\n</ul>\n</li>\n<li><strong>Agregación de mensajes</strong> para hacer algoritmos.</li>\n<li><strong>Motif finding</strong> para queries.</li>\n</ul>\n<h3>Documentación:</h3>\n<ul>\n<li><a href=\"https://graphframes.github.io/graphframes/docs/_site/user-guide.html\">User Guide</a>.</li>\n<li><a href=\"https://docs.databricks.com/spark/latest/graph-analysis/graphframes/user-guide-python.html\">User Guide - Python</a>.</li>\n<li><a href=\"https://graphframes.github.io/graphframes/docs/_site/api/python/index.html\">Documentación de la API</a>.</li>\n</ul>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226714_423573602",
+      "id": "20171102-112550_410534992",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:08:26+0000",
+      "dateFinished": "2021-10-28T23:08:30+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:443"
+    },
+    {
+      "text": "%md\n### Creación de grafo\n\n* Se crean a partir de `DataFrame` de aristas y/o vértices.\n* DataFrame de aristas debe tener las columnas `src` y `dst` (por lo menos).\n* DataFrame de vértices debe tener la columna `id` (por lo menos).\n* Los grafos son dirigidos.\n* Se almacenan con redundancia (vertex cut):\n  ![](http://spark.apache.org/docs/latest/img/edge_cut_vs_vertex_cut.png)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:30+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226714_649441047",
+      "id": "20181027-002925_1222103561",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:444"
+    },
+    {
+      "text": "%md\n### Veamos un ejemplo:\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:30+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226714_743895132",
+      "id": "20201030-111511_962191836",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:445"
+    },
+    {
+      "text": "%pyspark\n\nfrom graphframes import *\n\n# DataFrame de vértices\nv = spark.createDataFrame([\n  (\"a\", \"Alice\", 34),\n  (\"b\", \"Bob\", 36),\n  (\"c\", \"Charlie\", 30),\n  (\"d\", \"David\", 29),\n  (\"e\", \"Esther\", 32),\n  (\"f\", \"Fanny\", 36),\n  (\"g\", \"Gabby\", 60)\n],[\"id\", \"name\", \"age\"])\n\n# DataFrame de aristas\ne = spark.createDataFrame([\n  (\"a\", \"b\", \"amigo\"),\n  (\"b\", \"c\", \"sigue\"),\n  (\"c\", \"b\", \"sigue\"),\n  (\"f\", \"c\", \"sigue\"),\n  (\"e\", \"f\", \"sigue\"),\n  (\"e\", \"d\", \"amigo\"),\n  (\"d\", \"a\", \"amigo\"),\n  (\"a\", \"e\", \"amigo\"),\n  (\"a\", \"h\", \"amigo\")\n], [\"src\", \"dst\", \"relationship\"])\n\n# Creacion de GraphFrame\ng = GraphFrame(v, e)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:08:30+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_1610408664",
+      "id": "20181027-003337_2137373030",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:08:30+0000",
+      "dateFinished": "2021-10-28T23:09:18+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:446"
+    },
+    {
+      "text": "%pyspark\n\nz.show(g.vertices)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:09:18+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 304,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "name": "string",
+                      "age": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tname\tage\na\tAlice\t34\nb\tBob\t36\nc\tCharlie\t30\nd\tDavid\t29\ne\tEsther\t32\nf\tFanny\t36\ng\tGabby\t60\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=0",
+              "$$hashKey": "object:2010"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=1",
+              "$$hashKey": "object:2011"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_778867526",
+      "id": "20181027-004033_1700498403",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:09:18+0000",
+      "dateFinished": "2021-10-28T23:09:22+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:447"
+    },
+    {
+      "text": "%pyspark\n\nz.show(g.edges)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:09:22+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 356,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "src": "string",
+                      "dst": "string",
+                      "relationship": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "src\tdst\trelationship\na\tb\tamigo\nb\tc\tsigue\nc\tb\tsigue\nf\tc\tsigue\ne\tf\tsigue\ne\td\tamigo\nd\ta\tamigo\na\te\tamigo\na\th\tamigo\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=2",
+              "$$hashKey": "object:2061"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=3",
+              "$$hashKey": "object:2062"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_1774927815",
+      "id": "20181027-004041_1915960464",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:09:22+0000",
+      "dateFinished": "2021-10-28T23:09:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:448"
+    },
+    {
+      "text": "%pyspark\n\n# Query: Get in-degree of each vertex.\nz.show(g.inDegrees)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:09:23+0000",
+      "progress": 94,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "inDegree": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tinDegree\nf\t1\ne\t1\nh\t1\nd\t1\nc\t2\nb\t2\na\t1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=4",
+              "$$hashKey": "object:2112"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=5",
+              "$$hashKey": "object:2113"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=6",
+              "$$hashKey": "object:2114"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=7",
+              "$$hashKey": "object:2115"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=8",
+              "$$hashKey": "object:2116"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_2056340593",
+      "id": "20191205-202553_1454342767",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:09:24+0000",
+      "dateFinished": "2021-10-28T23:09:32+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:449"
+    },
+    {
+      "text": "%pyspark\n\n\n# Query: Count the number of \"follow\" connections in the graph.\n\nprint(\"Cantidad de amistades:\", \n        g.edges.filter(\"relationship = 'amigo'\").count())\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:09:32+0000",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Cantidad de amistades: 5\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=9",
+              "$$hashKey": "object:2178"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_92706710",
+      "id": "20191205-202527_215305701",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:09:32+0000",
+      "dateFinished": "2021-10-28T23:09:33+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:450"
+    },
+    {
+      "text": "%md\n### PageRank\n\n#### Se calcula: $$PR(p_i) = \\frac{\\epsilon}{N} + (1-\\epsilon) \\sum_{p_j \\in M(p_i)} \\frac{PR (p_j)}{L(p_j)}$$\n* donde \\\\(N\\\\) es la cantidad de paginas, \n* \\\\(\\epsilon\\\\) es la probabilidad de quedarse en la pagina (*reset probability*), \n* \\\\(M(p_i)\\\\) son las páginas a las que apunta \\\\(p_i\\\\) y \n* \\\\(L(p_j)\\\\) es la cantidad e links de la página \\\\(p_j\\\\).\n\n\n![](https://bitbucket.org/bigdata_famaf/diplodatos_bigdata/raw/HEAD/clases/00_introduccion/page_rank.png)\n\n\nMás info en [PageRank](https://es.wikipedia.org/wiki/PageRank).",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:09:33+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_523574383",
+      "id": "paragraph_1634844119648_1955861883",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:451"
+    },
+    {
+      "title": "PageRank",
+      "text": "%pyspark\n\n# Run PageRank algorithm, and show results.\nresults = g.pageRank(resetProbability=0.01, maxIter=10)\n\nz.show(results.vertices.select(\"id\", \"pagerank\"))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:09:33+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "id",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "pagerank",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {
+                          "priority": 0,
+                          "direction": "desc"
+                        },
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "pagerank": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tpagerank\ng\t0.011647254575707162\nb\t3.6199424699159937\ne\t0.03848486478566412\na\t0.05421739436354941\nf\t0.0347707909956736\nd\t0.0347707909956736\nc\t3.206166434367738\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=10",
+              "$$hashKey": "object:2264"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=11",
+              "$$hashKey": "object:2265"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=12",
+              "$$hashKey": "object:2266"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=13",
+              "$$hashKey": "object:2267"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=14",
+              "$$hashKey": "object:2268"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=15",
+              "$$hashKey": "object:2269"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=16",
+              "$$hashKey": "object:2270"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=17",
+              "$$hashKey": "object:2271"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=18",
+              "$$hashKey": "object:2272"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=19",
+              "$$hashKey": "object:2273"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=20",
+              "$$hashKey": "object:2274"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=21",
+              "$$hashKey": "object:2275"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=22",
+              "$$hashKey": "object:2276"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=23",
+              "$$hashKey": "object:2277"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=24",
+              "$$hashKey": "object:2278"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=25",
+              "$$hashKey": "object:2279"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=26",
+              "$$hashKey": "object:2280"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=27",
+              "$$hashKey": "object:2281"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=28",
+              "$$hashKey": "object:2282"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_1254566125",
+      "id": "20191205-202719_809801770",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:09:33+0000",
+      "dateFinished": "2021-10-28T23:12:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:452"
+    },
+    {
+      "title": "Guardemos el grafo",
+      "text": "%pyspark\nfrom pyspark.sql.functions import col\n\ng.edges.printSchema()\n\ng.edges \\\n        .select(col(\"src\").alias(\"Source\"), \n                col(\"dst\").alias(\"Target\"), \n                \"relationship\") \\\n        .coalesce(1) \\\n        .write \\\n        .csv(\"g_edges.csv\", mode=\"overwrite\", header=True)\n\n# Ver que pasa sin coalesce",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:24+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- src: string (nullable = true)\n |-- dst: string (nullable = true)\n |-- relationship: string (nullable = true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=29",
+              "$$hashKey": "object:2400"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_105219145",
+      "id": "20201029-163912_1652236873",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:12:24+0000",
+      "dateFinished": "2021-10-28T23:12:28+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:453"
+    },
+    {
+      "text": "%md\n## Ejemplo Red de Usuarios Twitter",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:29+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226715_345151491",
+      "id": "20181024-105040_178046617",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:454"
+    },
+    {
+      "title": "Load Tweets",
+      "text": "%pyspark\n\ntweets = spark.read.parquet(\"../../diplodatos_bigdata/ds/tweets.pqt\")\n\nprint(\"Cantidad de tweets:\", tweets.count())\n\nz.show(tweets.limit(10))\n# RT_times es la cantidad de veces que el usuario retweeteo el tweet\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:29+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "timestamp": "string",
+                      "user": "string",
+                      "RT_by": "string",
+                      "RT_times": "string",
+                      "text": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Cantidad de tweets: 172040\n\n"
+          },
+          {
+            "type": "TABLE",
+            "data": "timestamp\tuser\tRT_by\tRT_times\ttext\n1487970896\tierrejon\tteresapititesa\t2\tRT @ierrejon: Aulas masificadas, falta de profesorado, precariedad laboral para docentes... ¿Así pretende el PP garantizar el fut…\n1487971010\tRobiBaradel\titoferrero\t1\tRT @RobiBaradel: Nos parece muy sano que los ciudadanos sumen su tiempo y su compromiso a la Educación Pública, los esperamos todo e…\n1487971052\tvilma_ripoll\tPabloIannuzzi\t3\tRT @vilma_ripoll: Los \"voluntarios\"contra el paro docente, son carneros. Los docentes defienden su salario y la escuela pública. Apoyemos e…\n1487971121\tfargosi\tPiaAsao\t3\tRT @fargosi: Hay otros medios de protesta. Las huelgas docentes son inconstitucionales por las convenciones de Derechos del Niño. Jueces, a…\n1487971177\tGFrondizi\ttepergmailcomP1\t3\tRT @GFrondizi: Pido algún fiscal por incumplimiento del deber de educar a los niños de la nación Pena con cárcel p baradel Exijo q…\n1487971184\tRobiBaradel\tAnaliavc1\t41\tRT @RobiBaradel: Nos parece muy sano que los ciudadanos sumen su tiempo y su compromiso a la Educación Pública, los esperamos todo e…\n1487971345\tSuperSecretario\tari2271\t12\tRT @SuperSecretario: #Cambiemos sacó solo 1,5% pq en su spot no prometió Voluntarios para reemplazar Docentes. Si se avivaban arrasaban!  h…\n1487971368\tMarinaVolpe12\tBocaLocura312\t1\tRT @MarinaVolpe12: No se ofrezcan nunca como Médicos voluntarios.Si hacen como MM, te saca el hígado y pide disculpas xq se equivovó #Volun…\n1487971408\tlanacionmas\tsusanamartimari\t2\tRT @lanacionmas: ¿Qué opinás de la propuesta #VoluntarioDocenteNoAlParo que se generó en las redes sociales a partir del paro nacional? #La…\n1487971469\taeronauticosCFK\tandrea7533\t17\tRT @aeronauticosCFK: #ApoyoALosMaestros Para estas cosas sobra la guita. Son patéticos https://t.co/6BW6eGZYpT\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=30",
+              "$$hashKey": "object:2486"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=31",
+              "$$hashKey": "object:2487"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=32",
+              "$$hashKey": "object:2488"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_66034392",
+      "id": "20171101-124010_495006264",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:12:29+0000",
+      "dateFinished": "2021-10-28T23:12:35+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:455"
+    },
+    {
+      "text": "%md\n### Definición de la red de usuarios:\n\n* Queremos que un **usuario A esté conectado con usuario B** si B retweeteó un mensaje de A.\n* Queremos también la cantidad de retweets que hizo B de mensajes de A **distintos o no**.",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:35+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_491518",
+      "id": "20181024-111922_1953182558",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:456"
+    },
+    {
+      "title": "Generamos las conecciones por usuarios",
+      "text": "%pyspark\n\nfrom pyspark.sql.functions import sum, count\n\ntwitterConnections = tweets \\\n                        .groupBy(\"user\", \"RT_by\") \\\n                        .agg(sum(\"RT_times\").alias(\"count_RT\"), count(\"*\").alias(\"count_distinct_RT\"))\n\nprint(\"Cantidad de conecciones:\", twitterConnections.count())\n\nz.show(twitterConnections.limit(20))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:35+0000",
+      "progress": 80,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "user": "string",
+                      "RT_by": "string",
+                      "count_RT": "string",
+                      "count_distinct_RT": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          },
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "user": "string",
+                      "RT_by": "string",
+                      "count_RT": "string",
+                      "count_distinct_RT": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Cantidad de conecciones: 152613\n\n"
+          },
+          {
+            "type": "TABLE",
+            "data": "user\tRT_by\tcount_RT\tcount_distinct_RT\nWolffWaldo\txenia43sailor\t69\t1\natlanticsurff\tpaulobeni\t8\t1\nRuben_Rischmann\tPPperonoelsapo\t23\t1\nWolffWaldo\tMariePes72\t14\t1\nromerodiario\tRcaRawson\t4\t1\npablen2012\tNattyJuliAle\t4\t1\nMaestroPortenio\tsamuelevyARG\t14\t1\nLaAlfareraOk\taka_Mister\t33\t1\nertenembaum\tfertso\t4\t1\nBrujaUniversal\tO_Fer_\t6\t1\nmis2centavos\tmapolo1978\t2\t1\nlucaslauriente\t_Felpa_\t1\t1\nPajaritaTW\toscarcapellini\t6\t1\nArgentinaSoy1\t88lamaga\t82\t1\nel_telegrafo\tamaia78\t1\t1\nDEM___\taquisiclaudia\t79\t1\nLauraadri\tarturomakko\t12\t1\nscorohernan\tgustavospektor\t6\t1\nCondenaNacional\tSyl_Vicious\t3\t1\nhanalfabeto\tOsvaM55\t18\t2\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=33",
+              "$$hashKey": "object:2582"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=34",
+              "$$hashKey": "object:2583"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_688711388",
+      "id": "20171101-121958_1394663112",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:12:35+0000",
+      "dateFinished": "2021-10-28T23:12:53+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:457"
+    },
+    {
+      "title": "Hay que renombrar las conexiones de tweeter:",
+      "text": "%pyspark\n\nfrom pyspark.sql.functions import col\n\nedgesDF = twitterConnections \\\n    .select(col(\"user\").alias(\"src\"), \n            col(\"RT_by\").alias(\"dst\"),\n            \"count_RT\", \"count_distinct_RT\")\n                                       \nz.show(edgesDF.limit(10))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:53+0000",
+      "progress": 20,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "editorHide": false,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "src": "string",
+                      "dst": "string",
+                      "count_RT": "string",
+                      "count_distinct_RT": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "src\tdst\tcount_RT\tcount_distinct_RT\nWolffWaldo\txenia43sailor\t69\t1\natlanticsurff\tpaulobeni\t8\t1\nRuben_Rischmann\tPPperonoelsapo\t23\t1\nWolffWaldo\tMariePes72\t14\t1\nromerodiario\tRcaRawson\t4\t1\npablen2012\tNattyJuliAle\t4\t1\nMaestroPortenio\tsamuelevyARG\t14\t1\nLaAlfareraOk\taka_Mister\t33\t1\nertenembaum\tfertso\t4\t1\nBrujaUniversal\tO_Fer_\t6\t1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=35",
+              "$$hashKey": "object:2633"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_732246569",
+      "id": "20171101-124136_101875926",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:12:53+0000",
+      "dateFinished": "2021-10-28T23:12:56+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:458"
+    },
+    {
+      "title": "Hay que crear el DF de vértices",
+      "text": "%pyspark\n\nsrcs = edgesDF.select(col(\"src\").alias(\"id\"))\n\ndsts = edgesDF.select(col(\"dst\").alias(\"id\"))\n    \nvertexDF = srcs.unionAll(dsts).distinct()\n\nz.show(vertexDF.limit(10))\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:12:56+0000",
+      "progress": 98,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\nElGorilaje\nflordecaribe\nl_p_o\nPiru_laura\nbudano_ignacio\nRepettoLidia\nLilianaTren\ndefensoria_bol\nMIGUE67MIGUE\ncarlito60322427\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=36",
+              "$$hashKey": "object:2679"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_966334365",
+      "id": "20191206-163757_2138250663",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:12:56+0000",
+      "dateFinished": "2021-10-28T23:13:27+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:459"
+    },
+    {
+      "title": "Creación de GraphFrame:",
+      "text": "%pyspark\n\nfrom graphframes import *\n\ngraph = GraphFrame(vertexDF, edgesDF).cache()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:13:27+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_1859534845",
+      "id": "20171101-124739_82230555",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:13:27+0000",
+      "dateFinished": "2021-10-28T23:13:27+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:460"
+    },
+    {
+      "text": "%md\n### Operaciones básicas sobre grafos\n\n#### A continuación veremos como calcular: \n* la cantidad de vértices (usuarios)\n* la cantidad de arístas (conexiones)\n* el grado de cada vértice (cantidad de conexiones por usuario)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:13:27+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_193821606",
+      "id": "20171102-153102_880120870",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:461"
+    },
+    {
+      "title": "Tamaño del grafo",
+      "text": "%pyspark\n\nverticesCount = graph.vertices.count()\n\nedgesCount = graph.edges.count()\n\nprint(f\"\"\"%table\nCantidad de usuarios \\t Cantidad de conecciones\n{verticesCount} \\t {edgesCount}\"\"\")\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:13:27+0000",
+      "progress": 78,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "Cantidad de usuarios ": "string",
+                      " Cantidad de conecciones": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "Cantidad de usuarios \t Cantidad de conecciones\n57138 \t 152613\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=37",
+              "$$hashKey": "object:2805"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=38",
+              "$$hashKey": "object:2806"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_1801062944",
+      "id": "20171101-124845_773490911",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:13:27+0000",
+      "dateFinished": "2021-10-28T23:14:05+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:462"
+    },
+    {
+      "title": "Cantidad de conecciones por usuario",
+      "text": "%pyspark\n\nnodesDegree = graph.degrees\n\nsortedByDegree = nodesDegree.orderBy(\"degree\", ascending=False)\n\nz.show(sortedByDegree.limit(10))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:14:05+0000",
+      "progress": 92,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "degree": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tdegree\nWinston_Dunhill\t2325\nfernandocarnota\t1745\nsantosjorgeh\t1657\nlanatoparatodos\t1529\nRobiBaradel\t1483\nJorgeFavaloro\t1483\nelcoya1977\t1471\neldestapeweb\t1441\nlucaslauriente\t1422\nbetovaldez\t1407\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=39",
+              "$$hashKey": "object:2856"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_1850092744",
+      "id": "20171102-131720_1147432214",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:14:05+0000",
+      "dateFinished": "2021-10-28T23:14:22+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:463"
+    },
+    {
+      "text": "%md\n\n## Ejemplo Agregación de Mensajes\n\n### Influencia Colectiva\n\n#### Aplicaciones: \n* Marketing viral (influencia de opinión)\n* Detección de focos de dispersión de enfermedades\n* ...\n\n#### Cómo funciona:\n* Primero se calcula la **Influencia Colectiva (CI)**\n* En cada iteración elimina del grafo el nodo de mayor CI y recalcula el CI de los nodos restantes\n* Termina cuando la componente gigante se destruye\n* Solución básica: \\\\(O(N2)\\\\). Optimizada: \\\\(O(NlogN)\\\\)\n\n> Influence maximization in complex networks through optimal percolation” (Flaviano Morone, Hernán A. Makse, 27 Jun 2015) https://arxiv.org/abs/1506.08326\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:14:22+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226716_199339472",
+      "id": "20171102-132006_1774167041",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:464"
+    },
+    {
+      "text": "%md\n### Fórmula de CI\n\nLa formula de collective influence para un vértice \\\\(i\\\\) es:\n\n$$ CI(i) = (degree_i -  1) \\times \\sum\\limits_{j \\in vecinos(i)} (degree_j -  1)$$\n\nSe supone un grafo **no dirigido**.\n\n### Pasos para calcular collective influence son:\n\n* agregar el grado (degree) de cada nodo al grafo.\n* importar `AggregateMessages`.\n* calcular collective influence de cada individuo usando `AggregateMessages` de `GraphFrame`\n* ordenar los individuos por su collective influence de mayor a menor\n* imprimir el listado de individuos\n\n\n#### Documentación para implementar con GraphFrames:\n\n* Documentación sobre [AggregateMessages](https://graphframes.github.io/graphframes/docs/_site/user-guide.html#message-passing-via-aggregatemessages) con ejemplo.\n* Documentación de [API AggregateMessages](https://graphframes.github.io/graphframes/docs/_site/api/python/graphframes.html).\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:14:22+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_1554642225",
+      "id": "20171102-131904_821311339",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:465"
+    },
+    {
+      "text": "%pyspark\n\nfrom pyspark.sql.functions import sum\nfrom graphframes.lib import AggregateMessages as AM\n\n#Creo un nuevo grafo con los nodos y su degree (disponible en nodesDegree) y las aristas originales\ndegreeGraph = GraphFrame(nodesDegree, graph.edges )\n# Aristas y vértices están bien particionadas\n\n\n# Comenzamos a calcular CI \n\n# Cada nodo envia su degree-1 a sus vecinos a traves de sus conecciones salientes y entrantes\nmsgToDst = AM.src[\"degree\"] - 1\nmsgToSrc = AM.dst[\"degree\"] - 1\n\n# El DataFrame sumNeighborDegrees debe tener 2 columnas: id del nodo y sum_neighbor_degree \nsumNeighborDegrees = degreeGraph.aggregateMessages(\n    sum(AM.msg).alias(\"sum_neighbor_degree\"), # Hace aggregation en cada nodo sobre los mensages recibidos \n    sendToDst=msgToDst, # Envia a vecino por coneccion saliente\n    sendToSrc=msgToSrc) # Envia a vecino por coneccion entrante\n\n\n# Join de sumNeighborDegrees con degrees para tener todas las columnas necesarias para calcular CI.\n\nnodesDegreeJoin = nodesDegree.join(sumNeighborDegrees,\"id\")\n\n# Calculamos CI: para terminar de calcularlo debemos multiplicar la sumatoria del paso anterior por degree - 1 de cada nodo.\n# El DataFrame collectiveInfluence debe tener 2 columnas: id, ci y degree\n# Por ultimo ordena descendentemente por ci \n\ncollectiveInfluence = nodesDegreeJoin \\\n                          .select( ((col(\"degree\") - 1) * col(\"sum_neighbor_degree\")).alias(\"ci\"), \n                                    \"id\", \n                                    \"degree\") \\\n                          .orderBy(\"ci\", ascending=False) \\\n                          .cache()\n\nz.show(collectiveInfluence.limit(20))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:18:54+0000",
+      "progress": 30,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "ci": "string",
+                      "id": "string",
+                      "degree": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "ci\tid\tdegree\n71551312\tWinston_Dunhill\t2325\n57822552\tsantosjorgeh\t1657\n55026688\tfernandocarnota\t1745\n45848634\tJorgeFavaloro\t1483\n42052088\tlanatoparatodos\t1529\n37856910\telcoya1977\t1471\n33925374\tbetovaldez\t1407\n31175045\tLaBelgrana\t606\n30129480\tfargosi\t1271\n29494764\tRobiBaradel\t1483\n27043120\tcopi__\t1041\n23379462\tNunkMasKs\t1027\n18770024\tConCiencia2015\t533\n17316472\tWolffWaldo\t812\n16165470\tHugoYasky\t987\n15975882\tmis2centavos\t1020\n15693120\teldestapeweb\t1441\n15118908\tCarlos_AD_Viola\t533\n14284499\tCTAok\t830\n14149350\tEdgardoRovira\t1176\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=40",
+              "$$hashKey": "object:2982"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=41",
+              "$$hashKey": "object:2983"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=42",
+              "$$hashKey": "object:2984"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=43",
+              "$$hashKey": "object:2985"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=44",
+              "$$hashKey": "object:2986"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=45",
+              "$$hashKey": "object:2987"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_302245292",
+      "id": "20171101-125025_1054455316",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:18:54+0000",
+      "dateFinished": "2021-10-28T23:19:50+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:466"
+    },
+    {
+      "text": "%md\n## Motif Finding\n\n* Es un Domain-Specific Language (DSL) para expresar queries.\n* La unidad básica es la expresión de una arista\n\n### Ejemplos\n\n* `graph.find(\"(a)-[e]->(b); (b)-[e2]->(a)\")` expresa vértices unidos en ambas direcciones.\n    - Devuelve un DataFrame con columnas `\"a\"`, `\"b\"`, `\"e\"` y `\"e2\"`.\n* `graph.find(\"(a)-[e]->(b); (b)-[e2]->(c)\")` expresa dos aristas pegadas con un vértice común `b`. \n\n### Documentacion y ejemplo\n\n* [GraphFrame User Guide](https://graphframes.github.io/graphframes/docs/_site/user-guide.html#motif-finding).\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Motif Finding</h2>\n<ul>\n  <li>Es un Domain-Specific Language (DSL) para expresar queries.</li>\n  <li>La unidad básica es la expresión de una arista</li>\n</ul>\n<h3>Ejemplos</h3>\n<ul>\n  <li><code>graph.find(&quot;(a)-[e]-&gt;(b); (b)-[e2]-&gt;(a)&quot;)</code> expresa vértices unidos en ambas direcciones.\n    <ul>\n      <li>Devuelve un DataFrame con columnas <code>&quot;a&quot;</code>, <code>&quot;b&quot;</code>, <code>&quot;e&quot;</code> y <code>&quot;e2&quot;</code>.</li>\n    </ul>\n  </li>\n  <li><code>graph.find(&quot;(a)-[e]-&gt;(b); (b)-[e2]-&gt;(c)&quot;)</code> expresa dos aristas pegadas con un vértice común <code>b</code>.</li>\n</ul>\n<h3>Documentacion y ejemplo</h3>\n<ul>\n  <li><a href=\"https://graphframes.github.io/graphframes/docs/_site/user-guide.html#motif-finding\">GraphFrame User Guide</a>.</li>\n</ul>\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_393321115",
+      "id": "20181027-013740_419047675",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:467"
+    },
+    {
+      "text": "%md\n### Recordemos el grafo",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Recordemos el grafo</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_233726368",
+      "id": "paragraph_1634934672760_445886262",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:468"
+    },
+    {
+      "text": "%pyspark\nz.show(g.vertices)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:20:50+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "id": "string",
+                      "name": "string",
+                      "age": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "id\tname\tage\na\tAlice\t34\nb\tBob\t36\nc\tCharlie\t30\nd\tDavid\t29\ne\tEsther\t32\nf\tFanny\t36\ng\tGabby\t60\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=48",
+              "$$hashKey": "object:3133"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=49",
+              "$$hashKey": "object:3134"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_1192930026",
+      "id": "paragraph_1634934258381_857174466",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:20:50+0000",
+      "dateFinished": "2021-10-28T23:20:51+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:469"
+    },
+    {
+      "text": "%pyspark\nz.show(g.edges)",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:20:53+0000",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "src": "string",
+                      "dst": "string",
+                      "relationship": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "src\tdst\trelationship\na\tb\tamigo\nb\tc\tsigue\nc\tb\tsigue\nf\tc\tsigue\ne\tf\tsigue\ne\td\tamigo\nd\ta\tamigo\na\te\tamigo\na\th\tamigo\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=50",
+              "$$hashKey": "object:3184"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=51",
+              "$$hashKey": "object:3185"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_892804718",
+      "id": "paragraph_1634934349934_2020230166",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:20:53+0000",
+      "dateFinished": "2021-10-28T23:20:54+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:470"
+    },
+    {
+      "text": "%md\n### Hagamos algunos queries",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 9,
+        "editorHide": true,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Hagamos algunos queries</h3>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_1676648583",
+      "id": "paragraph_1634934687488_918172403",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:471"
+    },
+    {
+      "text": "%pyspark\n\n# Buscar pares de vértices en ambas direccione:\nmotifs = g.find(\"(a)-[e1]->(b); (b)-[e2]->(a)\")\n\nmotifs.printSchema()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:22:16+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "editorHide": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- a: struct (nullable = false)\n |    |-- id: string (nullable = true)\n |    |-- name: string (nullable = true)\n |    |-- age: long (nullable = true)\n |-- e1: struct (nullable = false)\n |    |-- src: string (nullable = true)\n |    |-- dst: string (nullable = true)\n |    |-- relationship: string (nullable = true)\n |-- b: struct (nullable = false)\n |    |-- id: string (nullable = true)\n |    |-- name: string (nullable = true)\n |    |-- age: long (nullable = true)\n |-- e2: struct (nullable = false)\n |    |-- src: string (nullable = true)\n |    |-- dst: string (nullable = true)\n |    |-- relationship: string (nullable = true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226717_1088614199",
+      "id": "20181027-015100_1394496292",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:22:16+0000",
+      "dateFinished": "2021-10-28T23:22:16+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:472"
+    },
+    {
+      "text": "%pyspark\n\nz.show(motifs)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:22:33+0000",
+      "progress": 9,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "a": "string",
+                      "e1": "string",
+                      "b": "string",
+                      "e2": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "a\te1\tb\te2\n[c,Charlie,30]\t[c,b,sigue]\t[b,Bob,36]\t[b,c,sigue]\n[b,Bob,36]\t[b,c,sigue]\t[c,Charlie,30]\t[c,b,sigue]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=62",
+              "$$hashKey": "object:3315"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=63",
+              "$$hashKey": "object:3316"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=64",
+              "$$hashKey": "object:3317"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=65",
+              "$$hashKey": "object:3318"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=66",
+              "$$hashKey": "object:3319"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_1323193906",
+      "id": "20181027-015533_344573808",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:22:18+0000",
+      "dateFinished": "2021-10-28T23:22:24+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:473"
+    },
+    {
+      "text": "%pyspark\n# Despues se pueden aplicar filtros para queries mas complejos.\nz.show(motifs.filter(\"b.age > 30\"))\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:22:23+0000",
+      "progress": 2,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "a": "string",
+                      "e1": "string",
+                      "b": "string",
+                      "e2": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "a\te1\tb\te2\n[c,Charlie,30]\t[c,b,sigue]\t[b,Bob,36]\t[b,c,sigue]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=67",
+              "$$hashKey": "object:3381"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=68",
+              "$$hashKey": "object:3382"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=69",
+              "$$hashKey": "object:3383"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=70",
+              "$$hashKey": "object:3384"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=71",
+              "$$hashKey": "object:3385"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_369647044",
+      "id": "20201030-112416_1681452862",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:22:23+0000",
+      "dateFinished": "2021-10-28T23:22:30+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:474"
+    },
+    {
+      "text": "%md\n## Visualización\n\nA continuación visualizaremos con [Gephi](https://gephi.org/) la parte del grafo (subgrafo) que contiene los mayores influencers.\n\nPara ello generaremos archivos *csv* como entrada de esta herramienta ",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h2>Visualización</h2>\n<p>A continuación visualizaremos con <a href=\"https://gephi.org/\">Gephi</a> la parte del grafo (subgrafo) que contiene los mayores influencers.</p>\n<p>Para ello generaremos archivos <em>csv</em> como entrada de esta herramienta</p>\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_697371221",
+      "id": "20171102-160936_360694508",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:475"
+    },
+    {
+      "text": "%pyspark\n\nminCI = 29000000\nminDegree = 600\n\n# tomo los usarios con mayor influencia o con más conecciones\nciTops =  \\\n    .filter((col(\"ci\") >= minCI) | (col(\"degree\") >= minDegree))\n\ngInfluencers = GraphFrame(ciTops, graph.edges)\n\n# Tomo solo las aristas que tengan vértices\nveTops = gInfluencers.find(\"(a)-[e]->(b)\") \\\n                .cache()\n      \n                \nprint(\"Cantidad de top influencers:\", veTops.count())\n\nveTops.printSchema()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-29T00:34:04+0000",
+      "progress": 85,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {
+          "1": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "a": "string",
+                      "e": "string",
+                      "b": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Cantidad de top influencers: 35\nroot\n |-- a: struct (nullable = false)\n |    |-- ci: long (nullable = true)\n |    |-- id: string (nullable = true)\n |    |-- degree: integer (nullable = false)\n |-- e: struct (nullable = false)\n |    |-- src: string (nullable = true)\n |    |-- dst: string (nullable = true)\n |    |-- count_RT: long (nullable = true)\n |    |-- count_distinct_RT: long (nullable = false)\n |-- b: struct (nullable = false)\n |    |-- ci: long (nullable = true)\n |    |-- id: string (nullable = true)\n |    |-- degree: integer (nullable = false)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=72",
+              "$$hashKey": "object:3487"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=73",
+              "$$hashKey": "object:3488"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=74",
+              "$$hashKey": "object:3489"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_1223461499",
+      "id": "20171102-000354_1806019706",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:25:26+0000",
+      "dateFinished": "2021-10-28T23:25:32+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:476"
+    },
+    {
+      "text": "%pyspark\n\neTops = veTops.select(\"e.*\")\n\neTops.printSchema()\n\n# Grafo de los tops\ngTops = GraphFrame(ciTops, eTops)\n\n\n# guardo un csv con los vertices para Gephi \ngTops.vertices \\\n        .select(\"*\", col(\"id\").alias(\"Label\")) \\\n        .coalesce(1) \\\n        .write \\\n        .csv(\"logs/top_influencers.csv\", mode=\"overwrite\", header=True)\n\n# guardo un csv con las aristas para Gephi\ngTops.edges \\\n        .select(col(\"src\").alias(\"Source\"), \n                col(\"dst\").alias(\"Target\"), \n                \"count_RT\",\"count_distinct_RT\") \\\n        .coalesce(1) \\\n        .write \\\n        .csv(\"logs/top_edges.csv\", mode=\"overwrite\", header=True)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-28T23:27:46+0000",
+      "progress": 20,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 6,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- src: string (nullable = true)\n |-- dst: string (nullable = true)\n |-- count_RT: long (nullable = true)\n |-- count_distinct_RT: long (nullable = false)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=75",
+              "$$hashKey": "object:3543"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=76",
+              "$$hashKey": "object:3544"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_1307184545",
+      "id": "20181027-020144_852191582",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-28T23:27:46+0000",
+      "dateFinished": "2021-10-28T23:27:49+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:477"
+    },
+    {
+      "text": "%md\n### Gephi\n\nLanzar el programa desde una terminal ejecutando:\n\n```sh\ngephi-0.9.2/bin/gephi\n```\n\nSeguir las instrucciones del profesor.",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Gephi</h3>\n<p>Lanzar el programa desde una terminal ejecutando:</p>\n<pre><code class=\"language-sh\">gephi-0.9.2/bin/gephi\n</code></pre>\n<p>Seguir las instrucciones del profesor.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_200294952",
+      "id": "20171102-161414_1207858851",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:478"
+    },
+    {
+      "text": "%md\n### Ejercicio\n\nComplete el siguiente programa para calcular el grafo de todas las posibles conexiones a los 5 mayores influenciadores y graficar el resultado con Gephi. \n\n#### Ayuda\n* Busque en la documentación [Api Datasets](http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.Dataset) algún método que devuelva las *n* primeras files de un Dataset equivalente a la directiva SQL `LIMIT`. \n* Para llenar el comando `find` busque la documentación de [Motif finding](https://graphframes.github.io/graphframes/docs/_site/user-guide.html#motif-finding).",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Ejercicio</h3>\n<p>Complete el siguiente programa para calcular el grafo de todas las posibles conexiones a los 5 mayores influenciadores y graficar el resultado con Gephi. </p>\n<h4>Ayuda</h4>\n<ul>\n  <li>Busque en la documentación <a href=\"http://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.sql.Dataset\">Api Datasets</a> algún método que devuelva las <em>n</em> primeras files de un Dataset equivalente a la directiva SQL <code>LIMIT</code>.</li>\n  <li>Para llenar el comando <code>find</code> busque la documentación de <a href=\"https://graphframes.github.io/graphframes/docs/_site/user-guide.html#motif-finding\">Motif finding</a>.</li>\n</ul>\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_1123861226",
+      "id": "20171102-110542_600666434",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:479"
+    },
+    {
+      "text": "%pyspark\n\n#take top n\ntopInfluencers = collectiveInfluence.orderBy('ci', ascending=False).limit(5) # solo los 5 primeros\n\n# Guardo Vértices\ntopInfluencers.select(\"*\", col(\"id\").alias(\"Label\")).coalesce(1) \\\n        .write \\\n        .csv(\"logs/top_influencers2.csv\", mode=\"overwrite\", header=True)\n\ngTops2 = GraphFrame(topInfluencers, graph.edges)\n# Encuentre las aristas que tienen vertices\neTops2 = gTops2.find(\"(a)-[e]->(b)\") \\\n            .select(col(\"e.src\").alias(\"Source\"),col(\"e.dst\").alias(\"Target\"), \"e.count_RT\", \"e.count_distinct_RT\")\n\neTops2.coalesce(1) \\\n        .write \\\n        .csv(\"logs/top_edges2.csv\", mode=\"overwrite\", header=True)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-29T00:03:04+0000",
+      "progress": 20,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 14,
+        "title": false,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=85",
+              "$$hashKey": "object:3674"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=86",
+              "$$hashKey": "object:3675"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=87",
+              "$$hashKey": "object:3676"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=88",
+              "$$hashKey": "object:3677"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_943559218",
+      "id": "20171101-170622_751215254",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "dateStarted": "2021-10-29T00:03:04+0000",
+      "dateFinished": "2021-10-29T00:03:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:480"
+    },
+    {
+      "text": "%md\n### Ejercicio\n\n0. Tomar el grafo de tweets y crear un dataframe con todas las aristas y vértices que forman triángulos dirigidos. O sea, todos los casos donde un usuario *A* retuitea a *B* que retuitea a *C* que retuitea a *A*.\n\n0. Hay casos donde los tres usuarios sean distintos?\n\n0. Graficar con Gephi el resultado.\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "fontSize": 12,
+        "editorHide": true,
+        "results": {},
+        "enabled": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<h3>Ejercicio</h3>\n<ol>\n  <li>\n  <p>Tomar el grafo de tweets y crear un dataframe con todas las aristas y vértices que forman triángulos dirigidos. O sea, todos los casos donde un usuario <em>A</em> retuitea a <em>B</em> que retuitea a <em>C</em> que retuitea a <em>A</em>.</p></li>\n  <li>\n  <p>Hay casos donde los tres usuarios sean distintos?</p></li>\n  <li>\n  <p>Graficar con Gephi el resultado.</p></li>\n</ol>\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226718_995947425",
+      "id": "20201030-122513_420199213",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:481"
+    },
+    {
+      "text": "%pyspark\nfull_graph = GraphFrame(collectiveInfluence, graph.edges)\ntriangulosMotif = full_graph.find(\"(a)-[e]->(b); (b)-[e2]->(c); (c)-[e3]->(a)\").filter(\"(a.id != b.id) and (a.id != c.id) and (b.id != c.id)\")\ncantidad_triangulos = triangulosMotif.count()\n\nprint('La cantidad de triángulos dirigidos con 3 usuarios distintos es:', cantidad_triangulos)\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-29T02:06:28+0000",
+      "progress": 86,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "a": "string",
+                      "e": "string",
+                      "b": "string",
+                      "e2": "string",
+                      "c": "string",
+                      "e3": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "La cantidad de triángulos dirigidos con 3 usuarios distintos es: 1551\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=172",
+              "$$hashKey": "object:3775"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=171",
+              "$$hashKey": "object:3776"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=173",
+              "$$hashKey": "object:3777"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=174",
+              "$$hashKey": "object:3778"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=175",
+              "$$hashKey": "object:3779"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=176",
+              "$$hashKey": "object:3780"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635466723516_39190447",
+      "id": "paragraph_1635466723516_39190447",
+      "dateCreated": "2021-10-29T00:18:43+0000",
+      "dateStarted": "2021-10-29T02:06:28+0000",
+      "dateFinished": "2021-10-29T02:06:32+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:482"
+    },
+    {
+      "text": "%pyspark\ntriangulosMotif.printSchema()\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-29T02:06:35+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- a: struct (nullable = false)\n |    |-- ci: long (nullable = true)\n |    |-- id: string (nullable = true)\n |    |-- degree: integer (nullable = false)\n |-- e: struct (nullable = false)\n |    |-- src: string (nullable = true)\n |    |-- dst: string (nullable = true)\n |    |-- count_RT: long (nullable = true)\n |    |-- count_distinct_RT: long (nullable = false)\n |-- b: struct (nullable = false)\n |    |-- ci: long (nullable = true)\n |    |-- id: string (nullable = true)\n |    |-- degree: integer (nullable = false)\n |-- e2: struct (nullable = false)\n |    |-- src: string (nullable = true)\n |    |-- dst: string (nullable = true)\n |    |-- count_RT: long (nullable = true)\n |    |-- count_distinct_RT: long (nullable = false)\n |-- c: struct (nullable = false)\n |    |-- ci: long (nullable = true)\n |    |-- id: string (nullable = true)\n |    |-- degree: integer (nullable = false)\n |-- e3: struct (nullable = false)\n |    |-- src: string (nullable = true)\n |    |-- dst: string (nullable = true)\n |    |-- count_RT: long (nullable = true)\n |    |-- count_distinct_RT: long (nullable = false)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635467150051_531174393",
+      "id": "paragraph_1635467150051_531174393",
+      "dateCreated": "2021-10-29T00:25:50+0000",
+      "dateStarted": "2021-10-29T02:06:35+0000",
+      "dateFinished": "2021-10-29T02:06:35+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:483"
+    },
+    {
+      "text": "%pyspark\ntriangVertex = triangulosMotif.select(\"a.*\").union(triangulosGraph.select(\"b.*\").union(triangulosGraph.select(\"c.*\"))).drop_duplicates()\ntriangEdges = triangulosMotif.select(\"e.*\").union(triangulosGraph.select(\"e2.*\").union(triangulosGraph.select(\"e3.*\"))).drop_duplicates()\n\n# Grafo de los tops\ntriangGraph = GraphFrame(triangVertex, triangEdges)\n\n\n# guardo un csv con los vertices para Gephi \ntriangGraph.vertices \\\n        .select(\"*\", col(\"id\").alias(\"Label\")) \\\n        .coalesce(1) \\\n        .write \\\n        .csv(\"logs/triangulos_nodos.csv\", mode=\"overwrite\", header=True)\n\n# guardo un csv con las aristas para Gephi\ntriangGraph.edges \\\n        .select(col(\"src\").alias(\"Source\"), \n                col(\"dst\").alias(\"Target\"), \n                \"count_RT\",\"count_distinct_RT\") \\\n        .coalesce(1) \\\n        .write \\\n        .csv(\"logs/triangulos_edges.csv\", mode=\"overwrite\", header=True)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-29T02:08:05+0000",
+      "progress": 99,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "ci": "string",
+                      "id": "string",
+                      "degree": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=177",
+              "$$hashKey": "object:3886"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=178",
+              "$$hashKey": "object:3887"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=179",
+              "$$hashKey": "object:3888"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=180",
+              "$$hashKey": "object:3889"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=181",
+              "$$hashKey": "object:3890"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=182",
+              "$$hashKey": "object:3891"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=183",
+              "$$hashKey": "object:3892"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=185",
+              "$$hashKey": "object:3893"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=184",
+              "$$hashKey": "object:3894"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=186",
+              "$$hashKey": "object:3895"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=187",
+              "$$hashKey": "object:3896"
+            },
+            {
+              "jobUrl": "http://localhost:4040/jobs/job?id=188",
+              "$$hashKey": "object:3897"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635467248942_1170185927",
+      "id": "paragraph_1635467248942_1170185927",
+      "dateCreated": "2021-10-29T00:27:28+0000",
+      "dateStarted": "2021-10-29T02:08:05+0000",
+      "dateFinished": "2021-10-29T02:08:31+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:484"
+    },
+    {
+      "title": "FIN",
+      "text": "val baseDir=\"https://git.cs.famaf.unc.edu.ar/dbarsotti/diplodatos_bigdata/raw/master/clases\"\n\nz.put(\"baseDir\", baseDir)\nprint(\"\"\"%html\n<script>\n    var heads = document.getElementsByTagName('h2');\n    var numHeads = heads.length;\n    var inner = \"\";\n    var i = 0;\n    var j = 0;\n    while (i < numHeads){\n        inner = heads[i].innerHTML;\n        if (inner.search(\".-\") != -1 ) {\n            j++;\n            heads[i].innerHTML = inner.replace(/(~|\\d+)\\.-/,\"\"+j+\".-\");\n        }\n        i++\n    }\n</script>\n\"\"\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-10-23T15:00:26+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "scala"
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "editorHide": true,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "baseDir: String = https://git.cs.famaf.unc.edu.ar/dbarsotti/diplodatos_bigdata/raw/master/clases\n"
+          },
+          {
+            "type": "HTML",
+            "data": "<script>\n    var heads = document.getElementsByTagName('h2');\n    var numHeads = heads.length;\n    var inner = \"\";\n    var i = 0;\n    var j = 0;\n    while (i < numHeads){\n        inner = heads[i].innerHTML;\n        if (inner.search(\".-\") != -1 ) {\n            j++;\n            heads[i].innerHTML = inner.replace(/(~|\\d+)\\.-/,\"\"+j+\".-\");\n        }\n        i++\n    }\n</script>\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1635001226719_459002258",
+      "id": "20171010-191336_1667301043",
+      "dateCreated": "2021-10-23T15:00:26+0000",
+      "status": "READY",
+      "$$hashKey": "object:485"
+    }
+  ],
+  "name": "Clase 07 - Grandes Grafos Sociales",
+  "id": "2GHR9QQ4B",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": false
+  },
+  "path": "/Clase 07 - Grandes Grafos Sociales"
+}
